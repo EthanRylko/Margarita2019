@@ -29,7 +29,9 @@ public class Robot extends IterativeRobot {
    * used for any initialization code.
    */
   @Override
-  public void robotInit() {
+  public void robotInit() {    
+    Actuators.init();
+
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -87,6 +89,13 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
+      Gamepad.update();
+
+      Drive.tankdrive(Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
+      
+      Elevator.elevator(Gamepad.secondary.getLeftY());
+      
+
   }
 
   /**
